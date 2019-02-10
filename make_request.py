@@ -3,6 +3,7 @@ import time
 import requests
 
 server_url = "http://localhost:5000/data"
+# server_url = "https://sensor-monitor-1.herokuapp.com/data"
 
 while True:
     try:

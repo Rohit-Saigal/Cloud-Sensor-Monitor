@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sensor Monitor</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Sensor Monitor</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="#">Home</a></li>
+        </ul>
+    </div>
+</nav>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m6 l3">
+                <div class="card blue">
+                    <div class="card-content white-text">
+                        <span class="card-title">Air Quality</span>
+
+                        <h5>CO2 - <em><b id="co2_label">-</b></em></h5>
+                        <h5>NO2 - <em><b id="no2_label">-</b></em></h5>
+                        <h5>SO2 - <em><b id="so2_label">-</b></em></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+
+    function updateUI() {
+        $.ajax({
+            url: "{{ url_for('get_data') }}",
+            success: function (response) {
+                console.log(response);
+                document.getElementById('co2_label').innerText = response.CO2;
+                document.getElementById('so2_label').innerText = response.SO2;
+                document.getElementById('no2_label').innerText = response.NO2;
+            }
+        });
+    }
+
+
+    $(document).ready(function () {
+        setInterval(updateUI, 500);
+
+    });
+</script>
+
+</body>
+
+<footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Sensor Monitor</h5>
+                <p class="grey-text text-lighten-4">Sensor Monitor displays sensor data sent by a Micro Controller in a
+                    HTTP Request.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Team</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="#!">Shubham Dongre</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</html>

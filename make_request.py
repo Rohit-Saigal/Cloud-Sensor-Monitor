@@ -7,9 +7,9 @@ server_url = "http://localhost:5000/data"
 
 while True:
     try:
-        co2 = random.randint(0, 100)
-        so2 = random.randint(0, 100)
-        no2 = random.randint(0, 100)
+        co2 = random.randint(0, 400)
+        so2 = random.randint(0, 400)
+        no2 = random.randint(0, 400)
         print("Sending Data ", co2, so2, no2)
         params = {
             'CO2': co2,

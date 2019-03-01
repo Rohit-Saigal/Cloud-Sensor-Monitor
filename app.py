@@ -16,7 +16,7 @@ WARN_CO2_Level = 200
 WARN_SO2_Level = 200
 WARN_NO2_Level = 200
 
-TO_ADDRS = ['2rohansawantct83@gmail.com']
+TO_ADDRS = ['shubhamdd.97@gmail.com','keith.quadros12@gmail.com','1996rohitsaigal@gmail.com']
 
 SENDER_MAIL_SERVER = 'smtp.mail.yahoo.com'
 SENDER_MAIL_PORT = 587

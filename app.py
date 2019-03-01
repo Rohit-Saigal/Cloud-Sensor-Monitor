@@ -1,4 +1,5 @@
 import smtplib
+from twilio.rest import Client
 
 from flask import Flask, render_template, jsonify, request
 
@@ -16,7 +17,8 @@ WARN_CO2_Level = 200
 WARN_SO2_Level = 200
 WARN_NO2_Level = 200
 
-TO_ADDRS = ['shubhamdd.97@gmail.com','keith.quadros12@gmail.com','1996rohitsaigal@gmail.com']
+TO_ADDRS = ['shubhamdd.97@gmail.com', 'keith.quadros12@gmail.com', '1996rohitsaigal@gmail.com']
+TO_PHONES = ['+919029171032', '+919323070488', '+917977367010']
 
 SENDER_MAIL_SERVER = 'smtp.mail.yahoo.com'
 SENDER_MAIL_PORT = 587
@@ -56,6 +58,7 @@ def data():
                   "SO2:{so2}\n" \
                   "NO2:{no2}".format(co2=co2, no2=no2, so2=so2)
         send_mail(to_addrs=TO_ADDRS, message=message)
+        send_sms(to_phone_nos=TO_PHONES, message=message)
 
     return "CO2:{} SO2:{} NO2:{}".format(CO2, SO2, NO2)
 
@@ -90,6 +93,22 @@ def send_mail(to_addrs, message):
         print("Successfully sent email")
     except smtplib.SMTPException as e:
         print("Error: unable to send email", str(e))
+
+
+def send_sms(to_phone_nos, message):
+    print("Sending SMS...")
+    account_sid = 'AC077c9d7eed883c119cf64de170c51b7b'
+    auth_token = '17b216fedc1586149ae347a10d9b7986'
+    client = Client(account_sid, auth_token)
+
+    for phone in to_phone_nos:
+        message = client.messages \
+            .create(
+            body=message,
+            from_='+17758634347',
+            to=phone,
+        )
+        print("Sent :",message.sid)
 
 
 if __name__ == '__main__':

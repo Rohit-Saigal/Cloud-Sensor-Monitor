@@ -2,8 +2,8 @@ import random
 import time
 import requests
 
-server_url = "http://localhost:5000/data"
-# server_url = "https://sensor-monitor-1.herokuapp.com/data"
+server_url = "http://localhost:80/data"
+# server_url = "https://air-pollution-rait-2019.herokuapp.com/data"
 
 while True:
     try:

@@ -2,8 +2,8 @@ import random
 import time
 import requests
 
-server_url = "http://localhost:80/data"
-# server_url = "https://air-pollution-rait-2019.herokuapp.com/data"
+# server_url = "http://localhost:80/data"
+server_url = "https://air-pollution-rait-2019.herokuapp.com/data"
 
 while True:
     try:
@@ -17,6 +17,6 @@ while True:
             'NO2': no2,
         }
         r = requests.get(url=server_url, params=params)
-        time.sleep(0.5)
+        time.sleep(15)
     except:
         pass

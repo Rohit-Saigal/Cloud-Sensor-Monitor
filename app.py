@@ -26,7 +26,7 @@ SENDER_MAIL_ID = "temp_bot_mailer@yahoo.com"
 SENDER_MAIL_PASS = 'mailerbottemp'
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html',
                            R_NO2_Level=R_NO2_Level,
@@ -34,7 +34,7 @@ def index():
                            R_SO2_Level=R_SO2_Level)
 
 
-@app.route('/data')
+@app.route('/data', methods=['GET', 'POST'])
 def data():
     co2 = request.args.get('CO2')
     so2 = request.args.get('SO2')
@@ -63,7 +63,7 @@ def data():
     return "CO2:{} SO2:{} NO2:{}".format(CO2, SO2, NO2)
 
 
-@app.route('/get-data')
+@app.route('/get-data', methods=['GET', 'POST'])
 def get_data():
     resp = {"CO2": CO2,
             "SO2": SO2,

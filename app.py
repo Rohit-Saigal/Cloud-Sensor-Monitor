@@ -1,7 +1,7 @@
 import smtplib
-from twilio.rest import Client
 
 from flask import Flask, render_template, jsonify, request
+from twilio.rest import Client
 
 app = Flask(__name__)
 
@@ -18,7 +18,7 @@ WARN_SO2_Level = 200
 WARN_NO2_Level = 200
 
 TO_ADDRS = ['shubhamdd.97@gmail.com', 'keith.quadros12@gmail.com', '1996rohitsaigal@gmail.com']
-TO_PHONES = [ '+919323070488', '+919029171032','+917977367010']
+TO_PHONES = ['+919323070488', '+919029171032', '+917977367010']
 
 SENDER_MAIL_SERVER = 'smtp.mail.yahoo.com'
 SENDER_MAIL_PORT = 587
@@ -36,9 +36,7 @@ def index():
 
 @app.route('/data', methods=['GET', 'POST'])
 def data():
-    co2 = request.args.get('CO2')
-    so2 = request.args.get('SO2')
-    no2 = request.args.get('NO2')
+    co2, so2, no2 = str(request.data).split('~')
 
     global CO2
     global SO2
@@ -108,7 +106,7 @@ def send_sms(to_phone_nos, msg):
             from_='+17758634347',
             to=phone,
         )
-        print("Sent :",message.sid)
+        print("Sent :", message.sid)
 
 
 if __name__ == '__main__':

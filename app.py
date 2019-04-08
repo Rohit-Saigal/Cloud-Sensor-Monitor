@@ -36,7 +36,7 @@ def index():
 
 @app.route('/data', methods=['GET', 'POST'])
 def data():
-    co2, so2, no2 = str(request.data).split('~')
+    co2, so2, no2 = str(request.data.decode(encoding='UTF-8')).split('~')
 
     global CO2
     global SO2
